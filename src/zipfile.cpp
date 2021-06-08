@@ -158,8 +158,7 @@ bool ZipFile::extractEntry(const QString &filePath, const QString &name)
     CHECK_UNZIP_BOOL();
 
     QFile f{filePath};
-    if (!f.open(QIODevice::WriteOnly))
-        return false;
+
     auto b = extractEntry(f, name);
     f.close();
     return b;
@@ -169,6 +168,9 @@ bool ZipFile::extractEntry(QIODevice &out, const QString &name)
     CHECK_UNZIP_BOOL();
 
     if (!gotoEntry(name))
+        return false;
+
+    if (!out.open(QIODevice::WriteOnly))
         return false;
 
     int err;
@@ -226,8 +228,7 @@ bool ZipFile::extractEntry(QIODevice &out, const QString &name)
 bool ZipFile::extractEntry(QByteArray &data, const QString &name)
 {
     QBuffer s{&data};
-    if (!s.open(QIODevice::WriteOnly))
-        return false;
+
     return extractEntry(s, name);
 }
 
