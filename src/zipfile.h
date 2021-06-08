@@ -2,9 +2,10 @@
 #define ZIPFILE_H
 
 #include <QString>
+#include "zipfile_global.h"
 
 class QIODevice;
-class ZipFile
+class ZIP_FILE_EXPORT ZipFile
 {
 public:
     enum OpenType

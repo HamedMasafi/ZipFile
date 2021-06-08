@@ -1,7 +1,7 @@
 QT -= gui
 
 TEMPLATE = lib
-DEFINES += SRC_LIBRARY
+DEFINES += ZIP_LIB_LIBRARY
 TARGET = zipfile
 CONFIG += c++11
 
@@ -20,17 +20,15 @@ SOURCES += \
     $$MINIZIP_PATH/ioapi_buf.c \
     $$MINIZIP_PATH/ioapi_mem.c \
     $$MINIZIP_PATH/unzip.c \
-    $$MINIZIP_PATH/zip.c \
-    $$PWD/zipfile.cpp
+    $$MINIZIP_PATH/zip.c
+
 HEADERS += \
     $$MINIZIP_PATH/crypt.h \
     $$MINIZIP_PATH/ioapi.h \
     $$MINIZIP_PATH/ioapi_buf.h \
     $$MINIZIP_PATH/ioapi_mem.h \
     $$MINIZIP_PATH/unzip.h \
-    $$MINIZIP_PATH/zip.h \
-    $$PWD/zipfile.h \
-    zipfile.h
+    $$MINIZIP_PATH/zip.h
 
 win32: {
     HEADERS += $$MINIZIP_PATH/iowin32.h

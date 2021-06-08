@@ -2,7 +2,7 @@
 MINIZIP_PATH=$$PWD/3rdparty/minizip
 ZLIB_PATH=$$PWD/3rdparty/zlib
 
-INCLUDEPATH += $$PWD $$MINIZIP_PATH $$ZLIB_PATH
+INCLUDEPATH += $$PWD/src $$MINIZIP_PATH $$ZLIB_PATH
 
 SOURCES += \
     $$MINIZIP_PATH/ioapi.c \
@@ -11,6 +11,7 @@ SOURCES += \
     $$MINIZIP_PATH/unzip.c \
     $$MINIZIP_PATH/zip.c \
     $$PWD/src/zipfile.cpp
+
 HEADERS += \
     $$MINIZIP_PATH/crypt.h \
     $$MINIZIP_PATH/ioapi.h \
