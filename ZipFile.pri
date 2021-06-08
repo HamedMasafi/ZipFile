@@ -10,7 +10,7 @@ SOURCES += \
     $$MINIZIP_PATH/ioapi_mem.c \
     $$MINIZIP_PATH/unzip.c \
     $$MINIZIP_PATH/zip.c \
-    $$PWD/zipfile.cpp
+    $$PWD/src/zipfile.cpp
 HEADERS += \
     $$MINIZIP_PATH/crypt.h \
     $$MINIZIP_PATH/ioapi.h \
@@ -18,8 +18,8 @@ HEADERS += \
     $$MINIZIP_PATH/ioapi_mem.h \
     $$MINIZIP_PATH/unzip.h \
     $$MINIZIP_PATH/zip.h \
-    $$PWD/zipfile.h \
-    zipfile.h
+    $$PWD/src/zipfile.h \
+    $$PWD/src/zipfile_global.h
 
 win32: {
     HEADERS += $$MINIZIP_PATH/iowin32.h

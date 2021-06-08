@@ -66,3 +66,6 @@ HEADERS += \
     $$ZLIB_PATH/zconf.h \
     $$ZLIB_PATH/zlib.h \
     $$ZLIB_PATH/zutil.h
+
+SOURCES += zipfile.cpp
+HEADERS += zipfile_global.h zipfile.h
