@@ -79,6 +79,21 @@ void ZipFileTest::test_qbytearray_extract()
     }
 }
 
+void ZipFileTest::test_iterator()
+{
+    QString zipFileName = QStringLiteral("%1/out.zip").arg(PATH);
+    ZipFile z{zipFileName};
+    QVERIFY(z.open(ZipFile::Open));
+
+    auto files2 = _files;
+
+    for (auto &e: z) {
+        QVERIFY(_files.contains(e.name()));
+        files2.removeOne(e.name());
+    }
+    QCOMPARE(files2.size(), 0);
+}
+
 void ZipFileTest::cleanupTestCase() {
 
     QString unzipDir = QStringLiteral("%1/out_test/").arg(PATH);

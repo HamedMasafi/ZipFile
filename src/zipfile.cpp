@@ -247,8 +247,39 @@ int ZipFile::compressionLevel() const
     return _compressionLevel;
 }
 
+bool ZipFile::gotoFirstEntry()
+{
+    CHECK_UNZIP_BOOL();
+
+    if( UNZ_OK == unzGoToFirstFile(_zipFile)) {
+        unz_file_info64 fi;
+        char filename[256];
+        unzGetCurrentFileInfo64(_zipFile, &fi, filename, sizeof(filename), NULL, 0, NULL, 0);
+        _currentEntryName = QString{filename};
+        return true;
+    }
+    return false;
+}
+
+bool ZipFile::gotoNextEntry()
+{
+    CHECK_UNZIP_BOOL();
+
+    if( UNZ_OK == unzGoToNextFile(_zipFile)) {
+        unz_file_info64 fi;
+        char filename[256];
+        unzGetCurrentFileInfo64(_zipFile, &fi, filename, sizeof(filename), NULL, 0, NULL, 0);
+        _currentEntryName = QString{filename};
+        return true;
+    }
+    return false;
+}
+
 bool ZipFile::gotoEntry(const QString &name)
 {
+    if (name == _currentEntryName)
+        return true;
+
     int n = unzGoToFirstFile(_zipFile);
 
     if (n != UNZ_OK)
@@ -260,11 +291,14 @@ bool ZipFile::gotoEntry(const QString &name)
         unzGetCurrentFileInfo64(_zipFile, &fi, filename, sizeof(filename), NULL, 0, NULL, 0);
 
         QString tmp{filename};
-        if (name == tmp)
+        if (name == tmp) {
+            _currentEntryName = name;
             return true;
+        }
 
         n = unzGoToNextFile(_zipFile);
     }
 
+    _currentEntryName.clear();
     return false;
 }

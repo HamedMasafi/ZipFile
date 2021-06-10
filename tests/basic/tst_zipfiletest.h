@@ -17,6 +17,7 @@ private slots:
     void test_zip();
     void test_unzip();
     void test_qbytearray_extract();
+    void test_iterator();
     void cleanupTestCase();
 };
 
