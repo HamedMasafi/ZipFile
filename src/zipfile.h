@@ -31,11 +31,15 @@ public:
     bool extractEntry(QIODevice &out, const QString &name);
     bool extractEntry(QByteArray &data, const QString &name);
 
+    void setCompressionLevel(int level);;
+    int compressionLevel() const;
+
 private:
     bool gotoEntry(const QString &name);
     void *_zipFile;
     QString _zipFileName;
     OpenType _mode{NotOpenned};
+    int _compressionLevel{0};
 };
 
 #endif // ZIPFILE_H

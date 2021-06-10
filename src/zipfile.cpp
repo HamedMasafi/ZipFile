@@ -112,13 +112,14 @@ bool ZipFile::addEntry(const QByteArray &data, const QString &entryName)
                          0,
                          "",
                          Z_DEFLATED,
-                         Z_DEFAULT_COMPRESSION,
+                         _compressionLevel,
                          0,
                          15,
                          8,
                          Z_DEFAULT_STRATEGY,
                          nullptr,
                          crc32(0, (uchar *) (data.data()), data.size()));
+
     zipWriteInFileInZip(_zipFile, data.data(), data.size());
     return true;
 }
@@ -230,6 +231,20 @@ bool ZipFile::extractEntry(QByteArray &data, const QString &name)
     QBuffer s{&data};
 
     return extractEntry(s, name);
+}
+
+void ZipFile::setCompressionLevel(int level)
+{
+    if (level < 0 || level > 9) {
+        qDebug() << "Error in setCompressionLevel: the level must be in range of (0-9)";
+        return;
+    }
+    _compressionLevel = level;
+}
+
+int ZipFile::compressionLevel() const
+{
+    return _compressionLevel;
 }
 
 bool ZipFile::gotoEntry(const QString &name)
