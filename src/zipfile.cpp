@@ -67,7 +67,7 @@ bool ZipFile::open(OpenType mode)
         return false;
     }
     _mode = mode;
-    return _zipFile;
+    return _zipFile == 0;
 }
 bool ZipFile::close()
 {
